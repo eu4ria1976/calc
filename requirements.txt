@@ -1,0 +1,10 @@
+# Scientific Calculator Requirements
+
+# Standard Python libraries (no additional dependencies needed for basic Tkinter)
+# These are included with Python by default
+
+# Testing framework
+pytest>=7.0.0
+
+# Packaging tools
+pyinstaller>=5.0.0
