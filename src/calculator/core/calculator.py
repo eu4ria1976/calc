@@ -14,7 +14,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # Import mathematical modules
 from modules.trigonometry import sin, cos, tan, asin, acos, atan
 from modules.logarithms import ln, log10, log2
-from modules.powers import power, sqrt, cbrt, exp, square, cube
+from modules.powers import power, sqrt, cbrt, exp, square, cube, reciprocal
 from modules.factorials import factorial, double_factorial
 from modules.fractions import simplify_fraction, add_fractions, subtract_fractions, multiply_fractions, divide_fractions
 
@@ -51,7 +51,7 @@ class CalculatorController:
         functions = [
             "sin", "cos", "tan", "asin", "acos", "atan",
             "ln", "log10", "log2", "exp", "sqrt", "cbrt",
-            "factorial", "double_factorial", "square", "cube", "power"
+            "factorial", "double_factorial", "square", "cube", "power", "reciprocal"
         ]
         return any(input_str.startswith(func + "(") for func in functions)
     
@@ -70,11 +70,11 @@ class CalculatorController:
             
             # Apply function
             if func_name == "sin":
-                return sin(arg)
+                return sin(arg, degrees=True)
             elif func_name == "cos":
-                return cos(arg)
+                return cos(arg, degrees=True)
             elif func_name == "tan":
-                return tan(arg)
+                return tan(arg, degrees=True)
             elif func_name == "asin":
                 return asin(arg)
             elif func_name == "acos":
@@ -107,6 +107,8 @@ class CalculatorController:
                 # We'll handle this in the GUI by creating an expression like "power(x,y)"
                 # But for direct function calls, we need to parse the arguments
                 raise ValueError("Power function requires two arguments, use expression evaluation instead")
+            elif func_name == "reciprocal":
+                return reciprocal(arg)
             else:
                 raise ValueError(f"Unknown function: {func_name}")
         except (TypeError, ValueError) as e:

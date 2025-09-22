@@ -160,3 +160,25 @@ def cube(x: Number) -> float:
         raise TypeError("Input must be a number")
         
     return power(x, 3)
+
+def reciprocal(x: Number) -> float:
+    """
+    Calculate the reciprocal of a number (1/x).
+    
+    Args:
+        x (Number): Non-zero real number
+        
+    Returns:
+        float: Reciprocal of x (1/x)
+        
+    Raises:
+        TypeError: If x is not a number
+        ValueError: If x is zero
+    """
+    if not isinstance(x, (int, float)):
+        raise TypeError("Input must be a number")
+    
+    if x == 0:
+        raise ValueError("Cannot calculate reciprocal of zero")
+        
+    return 1 / x
