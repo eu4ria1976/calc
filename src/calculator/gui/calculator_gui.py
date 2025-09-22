@@ -157,6 +157,13 @@ class ScientificCalculator:
             self.display.update_display(self.current_input)
             self.reset_next = True
             
+            # Update last result for subsequent operations
+            try:
+                self.controller.last_result = float(formatted_result)
+            except ValueError:
+                # If conversion fails, keep the previous last_result
+                pass
+            
         except Exception as e:
             self.show_error(str(e))
     

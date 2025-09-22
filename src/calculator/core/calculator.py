@@ -161,7 +161,10 @@ class CalculatorController:
             return result
         elif isinstance(result, (int, float)):
             # Format numbers nicely
-            if result == int(result):
+            # Handle precision issues with trigonometric functions
+            if abs(result) < 1e-10:
+                return "0"
+            elif result == int(result):
                 return str(int(result))
             else:
                 return f"{result:.10g}"
