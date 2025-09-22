@@ -79,7 +79,7 @@ The application follows a three-layer architecture:
 - **OutputFormatter**: Formats results for display
 
 ### 4.3 Calculation Engine
-- **TrigonometryModule**: sin, cos, tan, and their inverses
+- **TrigonometryModule**: sin, cos, tan, and their inverses (using degrees by default)
 - **LogarithmModule**: log, ln, and other logarithmic functions
 - **PowerModule**: Exponents, roots, and related operations
 - **FactorialModule**: Factorial calculations

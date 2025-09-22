@@ -29,7 +29,7 @@ class CalculatorDisplay:
             font=("Courier", 18, "bold"),
             bg="#1e1e1e",
             fg="#ffffff",
-            anchor="e",
+            anchor="w",
             padx=10
         )
         self.display.pack(fill=tk.BOTH, expand=True)
@@ -37,13 +37,13 @@ class CalculatorDisplay:
     def update_display(self, value):
         """Update the display with a new value"""
         # Format large numbers in scientific notation to prevent overflow
-        if isinstance(value, str) and len(value) > 15:
+        if isinstance(value, str) and len(value) > 20:
             try:
                 # Try to convert to float to check if it's a number
                 num_value = float(value)
                 # For very large numbers, use scientific notation
-                if abs(num_value) >= 1e10 or (abs(num_value) < 1e-4 and num_value != 0):
-                    formatted_value = f"{num_value:.6e}"
+                if abs(num_value) >= 1e15 or (abs(num_value) < 1e-4 and num_value != 0):
+                    formatted_value = f"{num_value:.10g}"
                 else:
                     formatted_value = value
             except ValueError:

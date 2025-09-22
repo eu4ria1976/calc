@@ -34,7 +34,8 @@ class CalculatorButtons:
                 ("π", "pi", "secondary"),
                 ("e", "e", "secondary"),
                 ("C", "clear", "clear"),
-                ("AC", "all_clear", "all_clear")
+                ("AC", "all_clear", "all_clear"),
+                ("DEL", "delete", "clear")
             ],
             # Row 2: Trigonometric functions
             [
@@ -65,7 +66,8 @@ class CalculatorButtons:
                 ("x!", "factorial", "function"),
                 ("x!!", "double_factorial", "function"),
                 ("1/x", "reciprocal", "function"),
-                ("±", "toggle_sign", "function")
+                ("±", "toggle_sign", "function"),
+                ("%", "percentage", "function")
             ],
             # Row 6: Digits and basic operators
             [
@@ -103,11 +105,14 @@ class CalculatorButtons:
         for row_idx, row in enumerate(buttons):
             for col_idx, (text, command, btn_type) in enumerate(row):
                 # Use a closure to capture the command correctly
+                # Set font size - same for all buttons
+                font = ("Arial", 12, "bold")
+                    
                 btn = tk.Button(
                     self.button_frame,
                     text=text,
                     command=lambda c=command: self.button_callback(c),
-                    font=("Arial", 12, "bold"),
+                    font=font,
                     bg=self.get_button_color(btn_type),
                     fg="white" if btn_type in ["operator", "function", "equals", "all_clear"] else "black",
                     activebackground=self.get_button_active_color(btn_type),

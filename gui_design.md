@@ -24,7 +24,7 @@ The buttons are organized into functional groups for intuitive access:
 [7] [8] [9] [/] [sin] [cos] [tan]
 [4] [5] [6] [*] [log] [ln] [e^x]
 [1] [2] [3] [-] [x²] [√x] [x!]
-[0] [.] [=] [+] [1/x] [±] [C] [AC]
+[0] [.] [=] [+] [1/x] [±] [%] [C] [AC] [DEL]
 --------------------------------------------------
 ```
 
@@ -32,7 +32,7 @@ The buttons are organized into functional groups for intuitive access:
 
 #### Row 1: Display
 - Single-line display showing input and results
-- Right-aligned text for numbers
+- Left-aligned text for numbers and error messages
 - Approximately 40 characters wide
 
 #### Rows 2-3: Scientific Function Groups
@@ -67,7 +67,7 @@ All buttons follow consistent styling for usability:
 
 #### Operation Buttons (+, -, *, /)
 - **Size**: 60px x 60px
-- **Font**: "Arial", 14pt, bold
+- **Font**: "Arial", 12pt, bold
 - **Background**: #ff9500 (orange)
 - **Text Color**: #ffffff (white)
 - **Border**: 1px solid #cc7700
@@ -76,7 +76,7 @@ All buttons follow consistent styling for usability:
 
 #### Function Buttons (sin, cos, etc.)
 - **Size**: 60px x 60px
-- **Font**: "Arial", 10pt, bold
+- **Font**: "Arial", 12pt, bold
 - **Background**: #4a4a4a (dark gray)
 - **Text Color**: #ffffff (white)
 - **Border**: 1px solid #333333
@@ -85,7 +85,7 @@ All buttons follow consistent styling for usability:
 
 #### Special Buttons (=, AC)
 - **Size**: 60px x 60px
-- **Font**: "Arial", 14pt, bold
+- **Font**: "Arial", 12pt, bold
 - **Background**: #ff2d5 (red for AC), #34c759 (green for =)
 - **Text Color**: #ffffff (white)
 - **Border**: 1px solid #cc2445 (for AC), #2a9c48 (for =)

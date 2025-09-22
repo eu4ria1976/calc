@@ -7,12 +7,14 @@ A feature-rich scientific calculator application with a graphical user interface
 - Basic arithmetic operations (addition, subtraction, multiplication, division)
 - Scientific functions (sin, cos, tan, asin, acos, atan)
 - Logarithmic functions (natural log, log base 10, log base 2)
-- Exponential and power functions (square, cube, square root, cube root, exponent)
+- Exponential and power functions (square, cube, square root, cube root, exponent, reciprocal)
 - Factorial calculations (including double factorial)
 - Constants (π, e)
 - Parentheses for complex expressions
 - Keyboard support for input
 - Error handling for invalid expressions
+- Delete (DEL) function to remove the last input digit
+- Percentage (%) function for calculating percentages
 
 ## Installation
 

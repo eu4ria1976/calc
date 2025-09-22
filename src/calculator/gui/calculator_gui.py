@@ -70,6 +70,10 @@ class ScientificCalculator:
                 self.apply_function(command)
             elif command == "power":
                 self.append_operator("^")
+            elif command == "delete":
+                self.delete_last_character()
+            elif command == "percentage":
+                self.apply_percentage()
             else:
                 # For other commands, treat as expression
                 self.current_input = command
@@ -180,6 +184,121 @@ class ScientificCalculator:
                 self.current_input = str(self.controller.last_result)
             
             self.display.update_display(self.current_input)
+        except Exception as e:
+            self.show_error(str(e))
+    
+    def delete_last_character(self):
+        """Delete the last character from the current input"""
+        try:
+            if self.current_input:
+                self.current_input = self.current_input[:-1]
+                if not self.current_input:
+                    self.display.update_display("0")
+                else:
+                    self.display.update_display(self.current_input)
+        except Exception as e:
+            self.show_error(str(e))
+    
+    def apply_percentage(self):
+        """Apply percentage in the context of an operation"""
+        try:
+            # If there's current input, check if it's part of an operation
+            if self.current_input:
+                # Check if the input contains an operator
+                if any(op in self.current_input for op in ["+", "-", "*", "/"]):
+                    # Parse the expression to get the operator and operands
+                    # Find the last operator
+                    last_operator_pos = -1
+                    last_operator = None
+                    for i in range(len(self.current_input) - 1, -1, -1):
+                        if self.current_input[i] in "+-*/":
+                            last_operator_pos = i
+                            last_operator = self.current_input[i]
+                            break
+                    
+                    if last_operator_pos != -1:
+                        # Split the expression into first operand, operator, and second operand
+                        first_operand_str = self.current_input[:last_operator_pos]
+                        second_operand_str = self.current_input[last_operator_pos + 1:]
+                        
+                        try:
+                            first_operand = float(first_operand_str)
+                            second_operand = float(second_operand_str)
+                            
+                            # Calculate percentage based on the operator
+                            if last_operator == "*":
+                                # For multiplication, calculate first_operand * (second_operand%)
+                                # This means first_operand * (second_operand / 100)
+                                result = first_operand * (second_operand / 100)
+                                self.current_input = str(result)
+                                self.display.update_display(self.current_input)
+                                self.reset_next = True
+                                
+                                # Update last result for subsequent operations
+                                self.controller.last_result = result
+                            elif last_operator == "/":
+                                # For division, calculate first_operand / (second_operand%)
+                                # This means first_operand / (second_operand / 100)
+                                result = first_operand / (second_operand / 100)
+                                self.current_input = str(result)
+                                self.display.update_display(self.current_input)
+                                self.reset_next = True
+                                
+                                # Update last result for subsequent operations
+                                self.controller.last_result = result
+                            elif last_operator == "+":
+                                # For addition, calculate first_operand + (second_operand% of first_operand)
+                                percentage_value = first_operand * (second_operand / 100)
+                                result = first_operand + percentage_value
+                                self.current_input = str(result)
+                                self.display.update_display(self.current_input)
+                                self.reset_next = True
+                                
+                                # Update last result for subsequent operations
+                                self.controller.last_result = result
+                            elif last_operator == "-":
+                                # For subtraction, calculate first_operand - (second_operand% of first_operand)
+                                percentage_value = first_operand * (second_operand / 100)
+                                result = first_operand - percentage_value
+                                self.current_input = str(result)
+                                self.display.update_display(self.current_input)
+                                self.reset_next = True
+                                
+                                # Update last result for subsequent operations
+                                self.controller.last_result = result
+                            
+                            self.display.update_display(self.current_input)
+                        except ValueError:
+                            self.show_error("Invalid input for percentage")
+                    else:
+                        # No operator found, just convert the current input to percentage
+                        try:
+                            value = float(self.current_input)
+                            result = value / 100
+                            self.current_input = str(result)
+                            self.display.update_display(self.current_input)
+                            self.reset_next = True
+                        except ValueError:
+                            self.show_error("Invalid input for percentage")
+                else:
+                    # No operator in input, just convert the current input to percentage
+                    try:
+                        value = float(self.current_input)
+                        result = value / 100
+                        self.current_input = str(result)
+                        self.display.update_display(self.current_input)
+                        self.reset_next = True
+                    except ValueError:
+                        self.show_error("Invalid input for percentage")
+            else:
+                # If no input, apply percentage to last result
+                result = self.controller.last_result / 100
+                self.current_input = str(result)
+                self.display.update_display(self.current_input)
+                self.reset_next = True
+                
+                # Update last result for subsequent operations
+                self.controller.last_result = result
         except Exception as e:
             self.show_error(str(e))
     
